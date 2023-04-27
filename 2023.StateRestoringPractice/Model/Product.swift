@@ -20,17 +20,17 @@ struct Product: Hashable, Codable {
     /// -Authors: Tomtom Chu
     /// -Date: 2023.4.26
     private enum CoderKeys: String, CodingKey {
-        case identifier
+        case text
     }
 
     // MARK: - Properties
     
-    var identifier: UUID
+    var text: String
         
     // MARK: - Initializers
     
-    init(identifier: UUID, name: String, imageName: String, year: Int, price: Double) {
-        self.identifier = identifier
+    init(text: String) {
+        self.text = text
     }
     
     // MARK: - Data Representation
@@ -50,13 +50,14 @@ struct Product: Hashable, Codable {
     // For NSUserActivity scene-based state restoration.
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CoderKeys.self)
-        try container.encode(identifier, forKey: .identifier)
+        try container.encode(text, forKey: .text)
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CoderKeys.self)
 
-        let decodedIdentifier = try values.decode(String.self, forKey: .identifier)
-        identifier = UUID(uuidString: decodedIdentifier)!
+        let decodedText = try values.decode(String.self, forKey: .text)
+        text = String(decodedText)
+        
     }
     
 }

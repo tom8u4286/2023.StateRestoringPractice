@@ -19,38 +19,51 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
             
         let window = UIWindow(windowScene: windowScene)
+        
+        
+//        print(session.stateRestorationActivity)
+        
+//        guard let userActivity = connectionOptions.userActivities.first ?? session.stateRestorationActivity else { return }
+        
+        print("SceneDelegate: connectionOptions.userActivities.first: \(connectionOptions.userActivities.first)")
+        print("SceneDelegate: scene.session.stateRestorationActivity: \(scene.session.stateRestorationActivity)")
+        
+        
+        if let userActivity = connectionOptions.userActivities.first ?? scene.session.stateRestorationActivity {
+                // Restore the user interface from the state restoration activity.
+//            setupScene(with userActivity: userActivity)
+            
+            print("SceneDelegate：userActivity有值！")
+        }
+        
         window.rootViewController = ViewController() // Where ViewController() is the initial View Controller
         window.makeKeyAndVisible()
         self.window = window
         
-        guard let userActivity = connectionOptions.userActivities.first ?? session.stateRestorationActivity else { return }
-        
-        print("test")
-        
-        if configure(window: window, session: session, with: userActivity) {
-            print("🍎 SceneDelegate: configure()")
-            // Remember this activity for later when this app quits or suspends.
-            scene.userActivity = userActivity
-            
-            /** Set the title for this scene to allow the system to differentiate multiple scenes for the user.
-                If set to nil or an empty string, the system doesn't display a title.
-            */
-            scene.title = userActivity.title
-            
-            // Mark this scene's session with this userActivity product identifier so you can update the UI later.
-            if let sessionProduct = SceneDelegate.product(for: userActivity) {
-                /// userInfo是一個以Key-Value的儲存資料的變數。
-                ///
-                /// NSUserActivity與UISceneSession都有userInfo，可以儲存資訊。
-                /// 在SceneDelegate+StateRestoration.swift檔案中，有宣告幾種key值。SceneDelegate.productIdentifierKey是其中一種。
-                ///
-                /// -Authors: Tomtom Chu
-                /// -Date: 2023.4.25
-                session.userInfo = [SceneDelegate.productIdentifierKey: sessionProduct.identifier]
-            }
-        } else {
-            Swift.debugPrint("Failed to restore scene from \(userActivity)")
-        }
+//        if configure(window: window, session: session, with: userActivity) {
+//            print("🍎 SceneDelegate: configure()")
+//            // Remember this activity for later when this app quits or suspends.
+//            scene.userActivity = userActivity
+//
+//            /** Set the title for this scene to allow the system to differentiate multiple scenes for the user.
+//                If set to nil or an empty string, the system doesn't display a title.
+//            */
+//            scene.title = userActivity.title
+//
+//            // Mark this scene's session with this userActivity product identifier so you can update the UI later.
+//            if let sessionProduct = SceneDelegate.product(for: userActivity) {
+//                /// userInfo是一個以Key-Value的儲存資料的變數。
+//                ///
+//                /// NSUserActivity與UISceneSession都有userInfo，可以儲存資訊。
+//                /// 在SceneDelegate+StateRestoration.swift檔案中，有宣告幾種key值。SceneDelegate.productIdentifierKey是其中一種。
+//                ///
+//                /// -Authors: Tomtom Chu
+//                /// -Date: 2023.4.25
+////                session.userInfo = [SceneDelegate.productIdentifierKey: sessionProduct.identifier]
+//            }
+//        } else {
+//            Swift.debugPrint("Failed to restore scene from \(userActivity)")
+//        }
         
         
     }
@@ -90,13 +103,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        if let userActivity = window?.windowScene?.userActivity {
+            userActivity.becomeCurrent()
+        }
     }
 
+    
     func sceneWillResignActive(_ scene: UIScene) {
-        // Called when the scene will move from an active state to an inactive state.
-        // This may occur due to temporary interruptions (ex. an incoming phone call).
+        // Save any pending changes to the product list.
+//        DataModelManager.sharedInstance.saveDataModel()
+        
+        print("🇰🇵 SceneDelegate: sceneWillResignActive()")
+        
+        if let userActivity = window?.windowScene?.userActivity {
+            userActivity.resignCurrent()
+            
+            scene.userActivity = userActivity
+        }
+        
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
@@ -112,9 +136,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
-    
-    
-    
     
     
     // MARK: - Handoff support
@@ -151,6 +172,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
 
+    func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
+        print("🇮🇸 SceneDelegate: stateRestorationActivity() userActivity:\(scene.userActivity)")
+        return scene.userActivity
+    }
 
 }
 

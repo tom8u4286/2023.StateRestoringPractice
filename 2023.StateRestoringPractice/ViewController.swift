@@ -12,6 +12,11 @@ class ViewController: UIViewController {
     
     // MARK: - property 變數常數
     
+    var product: Product!
+    
+    
+    var mytext = ""
+    
     lazy var vStack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -22,21 +27,14 @@ class ViewController: UIViewController {
         return stack
     }()
     
-    let action1 = UIAction { _ in
-        print("action1")
-    }
-    lazy var button1 = createButton(title: "Page1", action: action1)
     
-    
-    let action2 = UIAction { _ in
-        print("action2")
-    }
-    lazy var button2 = createButton(title: "Page2", action: action2)
+    lazy var saveBtn = createButton(title: "Save")
     
     lazy var textField: UITextField = {
         let field = UITextField()
         field.layer.cornerRadius = 5
         field.backgroundColor = .white3
+        field.addTarget(self, action: #selector(textFieldDidChanged(_:)), for: .editingChanged)
         
         return field
     }()
@@ -52,6 +50,9 @@ class ViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+    }
     
     // MARK: - private functions
     
@@ -64,18 +65,81 @@ class ViewController: UIViewController {
             vStack.widthAnchor.constraint(equalToConstant: 150)
         ])
         
-        vStack.addArrangedSubview(button1)
-        vStack.addArrangedSubview(button2)
         vStack.addArrangedSubview(textField)
+        vStack.addArrangedSubview(saveBtn)
     }
     
-    private func createButton(title: String, action: UIAction) -> UIButton {
+    // 產生一個Button
+    private func createButton(title: String) -> UIButton {
         let btn = UIButton()
         btn.setTitle(title, for: .normal)
+        
+        let action = UIAction { _ in
+            self.updateUserActivity()
+        }
         btn.addAction(action, for: .touchUpInside)
         btn.backgroundColor = .systemBlue
         btn.layer.cornerRadius = 10
         return btn
+    }
+    
+    func updateUserActivity(){
+//        var currentUserActivity = view.window?.windowScene?.userActivity
+//
+//        if currentUserActivity == nil {
+//            /** Note: You must include the activityType string below in your Info.plist file under the `NSUserActivityTypes` array.
+//                More info: https://developer.apple.com/documentation/foundation/nsuseractivity
+//            */
+////            currentUserActivity = NSUserActivity(activityType: SceneDelegate.MainSceneActivityType())
+//            currentUserActivity = NSUserActivity(activityType: "com.gmail.-023-StateRestoringPractice")
+//        }
+//
+//        print("ViewController: currentUserActivity:\(currentUserActivity)")
+//
+//        currentUserActivity?.addUserInfoEntries(from: ["testKey": "12345"])
+        
+        let userActivity = NSUserActivity(activityType: "com.gmail.-023-StateRestoringPractice")
+        userActivity.title = "Main scene restoration activity"
+        
+//        view.window?.windowScene?.userActivity = userActivity
+        
+        print("view.window?.windowScene?.userActivity:\(view.window?.windowScene?.userActivity)")
+    }
+    
+    @objc private func textFieldDidChanged(_ textField: UITextField){
+        if let newText = textField.text {
+            mytext = newText
+        }
+    }
+    
+    
+    override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+        
+        print("🇨🇦")
+
+        // 以DetailParentViewController.restoreProductKey，儲存當前的product的identifier。
+        coder.encode(mytext, forKey: "testKey")
+        
+    }
+    
+    
+    override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
+        print("🐞 decodeRestorableState")
+
+        guard let decodedText = coder.decodeObject(forKey: "testKey") as? String else {
+            fatalError("A product did not exist in the restore. In your app, handle this gracefully.")
+        }
+        
+        print("decodedText: \(decodedText)")
+//        product = DataModelManager.sharedInstance.product(fromIdentifier: decodedProductIdentifier)
+        
+//        restoredSelectedTab = coder.decodeInteger(forKey: DetailParentViewController.restoreSelectedTabKey)
+        
+        
+
+        // Note: The child view controllers inside the tab bar and the EditViewController each restore themselves.
     }
 
 }

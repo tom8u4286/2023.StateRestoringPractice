@@ -50,7 +50,7 @@ extension SceneDelegate {
                  ///
                  /// -Authors: Tomtom Chu
                  /// -Date: 2023.4.26
-                 product = DataModelManager.sharedInstance.product(fromIdentifier: productIdentifier)
+//                 product = DataModelManager.sharedInstance.product(fromIdentifier: productIdentifier)
              }
          }
          return product

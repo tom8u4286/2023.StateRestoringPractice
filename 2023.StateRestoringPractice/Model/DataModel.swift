@@ -77,16 +77,16 @@ class DataModelManager {
 //    }
     
     // 以product identifier，找出DataModel中的特定Product。
-    func product(fromIdentifier: String) -> Product? {
-        let filteredProducts = dataModel.products.filter { product in
-            let productIdentifier = product.identifier.uuidString
-            if productIdentifier == fromIdentifier { return true } else { return false }
-        }
-        if filteredProducts.isEmpty {
-            fatalError("Can't find product from identifier.")
-        }
-        return filteredProducts[0]
-    }
+//    func product(fromIdentifier: String) -> Product? {
+//        let filteredProducts = dataModel.products.filter { product in
+//            let productIdentifier = product.identifier.uuidString
+//            if productIdentifier == fromIdentifier { return true } else { return false }
+//        }
+//        if filteredProducts.isEmpty {
+//            fatalError("Can't find product from identifier.")
+//        }
+//        return filteredProducts[0]
+//    }
     
     // MARK: - Actions
      

@@ -33,12 +33,20 @@ class ViewController: UIViewController {
     }
     lazy var button2 = createButton(title: "Page2", action: action2)
     
+    lazy var textField: UITextField = {
+        let field = UITextField()
+        field.layer.cornerRadius = 5
+        field.backgroundColor = .white3
+        
+        return field
+    }()
+    
     // MARK: - lifecycle 生命週期
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        view.backgroundColor = .devYellow
+        view.backgroundColor = .white
         
         setupViews()
         
@@ -52,12 +60,13 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate([
             vStack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             vStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            vStack.heightAnchor.constraint(equalToConstant: 100),
-            vStack.widthAnchor.constraint(equalToConstant: 100)
+            vStack.heightAnchor.constraint(equalToConstant: 150),
+            vStack.widthAnchor.constraint(equalToConstant: 150)
         ])
         
         vStack.addArrangedSubview(button1)
         vStack.addArrangedSubview(button2)
+        vStack.addArrangedSubview(textField)
     }
     
     private func createButton(title: String, action: UIAction) -> UIButton {

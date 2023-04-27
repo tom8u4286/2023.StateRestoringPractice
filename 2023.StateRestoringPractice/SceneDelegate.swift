@@ -21,10 +21,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = ViewController() // Where ViewController() is the initial View Controller
         window.makeKeyAndVisible()
-        
         self.window = window
         
-//        guard let userActivity = connectionOptions.userActivities.first ?? session.stateRestorationActivity else { return }
+        guard let userActivity = connectionOptions.userActivities.first ?? session.stateRestorationActivity else { return }
+        
+        print("test")
+        
+        if configure(window: window, session: session, with: userActivity) {
+            print("🍎 SceneDelegate: configure()")
+            // Remember this activity for later when this app quits or suspends.
+            scene.userActivity = userActivity
+            
+            /** Set the title for this scene to allow the system to differentiate multiple scenes for the user.
+                If set to nil or an empty string, the system doesn't display a title.
+            */
+            scene.title = userActivity.title
+            
+            // Mark this scene's session with this userActivity product identifier so you can update the UI later.
+            if let sessionProduct = SceneDelegate.product(for: userActivity) {
+                /// userInfo是一個以Key-Value的儲存資料的變數。
+                ///
+                /// NSUserActivity與UISceneSession都有userInfo，可以儲存資訊。
+                /// 在SceneDelegate+StateRestoration.swift檔案中，有宣告幾種key值。SceneDelegate.productIdentifierKey是其中一種。
+                ///
+                /// -Authors: Tomtom Chu
+                /// -Date: 2023.4.25
+                session.userInfo = [SceneDelegate.productIdentifierKey: sessionProduct.identifier]
+            }
+        } else {
+            Swift.debugPrint("Failed to restore scene from \(userActivity)")
+        }
         
         
     }
@@ -36,14 +62,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             let presentView = ViewController()
             
+            if let userInfo = activity.userInfo {
+                
+                if let navigationController = window?.rootViewController as? UINavigationController {
+                    // 進入presentView
+                    navigationController.pushViewController(presentView, animated: false)
+                }
+                
+                
+                succeeded = true
+                
+            }
+            
         }
         
         return succeeded
     }
-    
-    
-    
-    
     
     
     
@@ -77,6 +111,44 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+    }
+    
+    
+    
+    
+    
+    // MARK: - Handoff support
+    
+    func scene(_ scene: UIScene, willContinueUserActivityWithType userActivityType: String) {
+        //..
+    }
+
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        
+        print("🇹🇷 SceneDelegate: continue")
+        
+        guard userActivity.activityType == SceneDelegate.MainSceneActivityType() else { return }
+ 
+//        if let rootViewController = window?.rootViewController as? UINavigationController {
+//            // Update the detail view controller.
+//            if let detailParentViewController = rootViewController.topViewController as? DetailParentViewController {
+//                detailParentViewController.product = SceneDelegate.product(for: userActivity)
+//            }
+//        }
+    }
+
+    func scene(_ scene: UIScene, didFailToContinueUserActivityWithType userActivityType: String, error: Error) {
+        
+        print("🇯🇵 SceneDelegate: didFailToContinueUserActivityWithType")
+        
+        let alert = UIAlertController(title: NSLocalizedString("UnableToContinueTitle", comment: ""),
+                                      message: error.localizedDescription,
+                                      preferredStyle: .alert)
+        let okAction = UIAlertAction(title: NSLocalizedString("OKTitle", comment: ""), style: .default) { (action) in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(okAction)
+        window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
 
 

@@ -16,8 +16,9 @@ class ViewController: UIViewController {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
-        stack.showBorder()
-        
+        stack.spacing = 10
+        stack.distribution = .fillEqually
+        stack.alignment = .fill
         return stack
     }()
     
@@ -54,17 +55,19 @@ class ViewController: UIViewController {
             vStack.heightAnchor.constraint(equalToConstant: 100),
             vStack.widthAnchor.constraint(equalToConstant: 100)
         ])
+        
+        vStack.addArrangedSubview(button1)
+        vStack.addArrangedSubview(button2)
     }
     
     private func createButton(title: String, action: UIAction) -> UIButton {
         let btn = UIButton()
         btn.setTitle(title, for: .normal)
         btn.addAction(action, for: .touchUpInside)
-        
+        btn.backgroundColor = .systemBlue
+        btn.layer.cornerRadius = 10
         return btn
-        
     }
-
 
 }
 

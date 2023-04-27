@@ -14,6 +14,7 @@
 		DD245F8229F9814D00D6DB87 /* _023_StateRestoringPractice.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DD245F8029F9814D00D6DB87 /* _023_StateRestoringPractice.xcdatamodeld */; };
 		DD245F8429F9814E00D6DB87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD245F8329F9814E00D6DB87 /* Assets.xcassets */; };
 		DD245F8729F9814E00D6DB87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD245F8529F9814E00D6DB87 /* LaunchScreen.storyboard */; };
+		DD245F8F29F9895300D6DB87 /* SceneDelegate+StateRestoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD245F8E29F9895300D6DB87 /* SceneDelegate+StateRestoration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		DD245F8329F9814E00D6DB87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD245F8629F9814E00D6DB87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD245F8829F9814E00D6DB87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD245F8E29F9895300D6DB87 /* SceneDelegate+StateRestoration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+StateRestoration.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +44,7 @@
 		DD245F6B29F9814D00D6DB87 = {
 			isa = PBXGroup;
 			children = (
+				DD245F8E29F9895300D6DB87 /* SceneDelegate+StateRestoration.swift */,
 				DD245F7629F9814D00D6DB87 /* 2023.StateRestoringPractice */,
 				DD245F7529F9814D00D6DB87 /* Products */,
 			);
@@ -145,6 +148,7 @@
 				DD245F7C29F9814D00D6DB87 /* ViewController.swift in Sources */,
 				DD245F7829F9814D00D6DB87 /* AppDelegate.swift in Sources */,
 				DD245F7A29F9814D00D6DB87 /* SceneDelegate.swift in Sources */,
+				DD245F8F29F9895300D6DB87 /* SceneDelegate+StateRestoration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

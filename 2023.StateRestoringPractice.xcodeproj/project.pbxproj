@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD4A945429FA2CFC00E6BE27 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4A945329FA2CFC00E6BE27 /* UIColor+.swift */; };
+		AD4A945729FA2D8800E6BE27 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4A945629FA2D8800E6BE27 /* UIView+.swift */; };
 		DD245F7829F9814D00D6DB87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD245F7729F9814D00D6DB87 /* AppDelegate.swift */; };
 		DD245F7A29F9814D00D6DB87 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD245F7929F9814D00D6DB87 /* SceneDelegate.swift */; };
 		DD245F7C29F9814D00D6DB87 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD245F7B29F9814D00D6DB87 /* ViewController.swift */; };
-		DD245F7F29F9814D00D6DB87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD245F7D29F9814D00D6DB87 /* Main.storyboard */; };
 		DD245F8229F9814D00D6DB87 /* _023_StateRestoringPractice.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DD245F8029F9814D00D6DB87 /* _023_StateRestoringPractice.xcdatamodeld */; };
 		DD245F8429F9814E00D6DB87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD245F8329F9814E00D6DB87 /* Assets.xcassets */; };
 		DD245F8729F9814E00D6DB87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD245F8529F9814E00D6DB87 /* LaunchScreen.storyboard */; };
@@ -18,11 +19,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AD4A945329FA2CFC00E6BE27 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		AD4A945629FA2D8800E6BE27 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		DD245F7429F9814D00D6DB87 /* 2023.StateRestoringPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2023.StateRestoringPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD245F7729F9814D00D6DB87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD245F7929F9814D00D6DB87 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DD245F7B29F9814D00D6DB87 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		DD245F7E29F9814D00D6DB87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DD245F8129F9814D00D6DB87 /* _023_StateRestoringPractice.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = _023_StateRestoringPractice.xcdatamodel; sourceTree = "<group>"; };
 		DD245F8329F9814E00D6DB87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD245F8629F9814E00D6DB87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -41,10 +43,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD4A945529FA2D7500E6BE27 /* Dev */ = {
+			isa = PBXGroup;
+			children = (
+				AD4A945329FA2CFC00E6BE27 /* UIColor+.swift */,
+				AD4A945629FA2D8800E6BE27 /* UIView+.swift */,
+			);
+			path = Dev;
+			sourceTree = "<group>";
+		};
 		DD245F6B29F9814D00D6DB87 = {
 			isa = PBXGroup;
 			children = (
-				DD245F8E29F9895300D6DB87 /* SceneDelegate+StateRestoration.swift */,
 				DD245F7629F9814D00D6DB87 /* 2023.StateRestoringPractice */,
 				DD245F7529F9814D00D6DB87 /* Products */,
 			);
@@ -63,8 +73,9 @@
 			children = (
 				DD245F7729F9814D00D6DB87 /* AppDelegate.swift */,
 				DD245F7929F9814D00D6DB87 /* SceneDelegate.swift */,
+				DD245F8E29F9895300D6DB87 /* SceneDelegate+StateRestoration.swift */,
 				DD245F7B29F9814D00D6DB87 /* ViewController.swift */,
-				DD245F7D29F9814D00D6DB87 /* Main.storyboard */,
+				AD4A945529FA2D7500E6BE27 /* Dev */,
 				DD245F8329F9814E00D6DB87 /* Assets.xcassets */,
 				DD245F8529F9814E00D6DB87 /* LaunchScreen.storyboard */,
 				DD245F8829F9814E00D6DB87 /* Info.plist */,
@@ -133,7 +144,6 @@
 			files = (
 				DD245F8729F9814E00D6DB87 /* LaunchScreen.storyboard in Resources */,
 				DD245F8429F9814E00D6DB87 /* Assets.xcassets in Resources */,
-				DD245F7F29F9814D00D6DB87 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,23 +156,17 @@
 			files = (
 				DD245F8229F9814D00D6DB87 /* _023_StateRestoringPractice.xcdatamodeld in Sources */,
 				DD245F7C29F9814D00D6DB87 /* ViewController.swift in Sources */,
+				AD4A945729FA2D8800E6BE27 /* UIView+.swift in Sources */,
 				DD245F7829F9814D00D6DB87 /* AppDelegate.swift in Sources */,
 				DD245F7A29F9814D00D6DB87 /* SceneDelegate.swift in Sources */,
 				DD245F8F29F9895300D6DB87 /* SceneDelegate+StateRestoration.swift in Sources */,
+				AD4A945429FA2CFC00E6BE27 /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		DD245F7D29F9814D00D6DB87 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DD245F7E29F9814D00D6DB87 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		DD245F8529F9814E00D6DB87 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -295,12 +299,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WGV47WB79A;
+				DEVELOPMENT_TEAM = ZC8MA4R33F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = 2023.StateRestoringPractice/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -323,12 +327,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WGV47WB79A;
+				DEVELOPMENT_TEAM = ZC8MA4R33F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = 2023.StateRestoringPractice/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

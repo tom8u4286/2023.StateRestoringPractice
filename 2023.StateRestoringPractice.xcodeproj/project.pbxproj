@@ -7,33 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AD4A945429FA2CFC00E6BE27 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4A945329FA2CFC00E6BE27 /* UIColor+.swift */; };
-		AD4A945729FA2D8800E6BE27 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4A945629FA2D8800E6BE27 /* UIView+.swift */; };
-		AD4A949629FA479E00E6BE27 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4A949529FA479E00E6BE27 /* Product.swift */; };
-		AD4A949829FA484000E6BE27 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4A949729FA484000E6BE27 /* DataModel.swift */; };
 		DD245F7829F9814D00D6DB87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD245F7729F9814D00D6DB87 /* AppDelegate.swift */; };
 		DD245F7A29F9814D00D6DB87 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD245F7929F9814D00D6DB87 /* SceneDelegate.swift */; };
-		DD245F7C29F9814D00D6DB87 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD245F7B29F9814D00D6DB87 /* ViewController.swift */; };
-		DD245F8229F9814D00D6DB87 /* _023_StateRestoringPractice.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DD245F8029F9814D00D6DB87 /* _023_StateRestoringPractice.xcdatamodeld */; };
 		DD245F8429F9814E00D6DB87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD245F8329F9814E00D6DB87 /* Assets.xcassets */; };
 		DD245F8729F9814E00D6DB87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD245F8529F9814E00D6DB87 /* LaunchScreen.storyboard */; };
-		DD245F8F29F9895300D6DB87 /* SceneDelegate+StateRestoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD245F8E29F9895300D6DB87 /* SceneDelegate+StateRestoration.swift */; };
+		DD2510CE29FF88E1009BA409 /* MainTabsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2510CD29FF88E1009BA409 /* MainTabsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AD4A945329FA2CFC00E6BE27 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
-		AD4A945629FA2D8800E6BE27 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
-		AD4A949529FA479E00E6BE27 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
-		AD4A949729FA484000E6BE27 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		DD245F7429F9814D00D6DB87 /* 2023.StateRestoringPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2023.StateRestoringPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD245F7729F9814D00D6DB87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD245F7929F9814D00D6DB87 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DD245F7B29F9814D00D6DB87 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		DD245F8129F9814D00D6DB87 /* _023_StateRestoringPractice.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = _023_StateRestoringPractice.xcdatamodel; sourceTree = "<group>"; };
 		DD245F8329F9814E00D6DB87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD245F8629F9814E00D6DB87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD245F8829F9814E00D6DB87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DD245F8E29F9895300D6DB87 /* SceneDelegate+StateRestoration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+StateRestoration.swift"; sourceTree = "<group>"; };
+		DD2510CD29FF88E1009BA409 /* MainTabsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,24 +35,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AD4A945529FA2D7500E6BE27 /* Dev */ = {
-			isa = PBXGroup;
-			children = (
-				AD4A945329FA2CFC00E6BE27 /* UIColor+.swift */,
-				AD4A945629FA2D8800E6BE27 /* UIView+.swift */,
-			);
-			path = Dev;
-			sourceTree = "<group>";
-		};
-		AD4A949429FA478000E6BE27 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				AD4A949529FA479E00E6BE27 /* Product.swift */,
-				AD4A949729FA484000E6BE27 /* DataModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		DD245F6B29F9814D00D6DB87 = {
 			isa = PBXGroup;
 			children = (
@@ -86,14 +56,10 @@
 			children = (
 				DD245F7729F9814D00D6DB87 /* AppDelegate.swift */,
 				DD245F7929F9814D00D6DB87 /* SceneDelegate.swift */,
-				DD245F8E29F9895300D6DB87 /* SceneDelegate+StateRestoration.swift */,
-				DD245F7B29F9814D00D6DB87 /* ViewController.swift */,
-				AD4A945529FA2D7500E6BE27 /* Dev */,
-				AD4A949429FA478000E6BE27 /* Model */,
+				DD2510CD29FF88E1009BA409 /* MainTabsController.swift */,
 				DD245F8329F9814E00D6DB87 /* Assets.xcassets */,
 				DD245F8529F9814E00D6DB87 /* LaunchScreen.storyboard */,
 				DD245F8829F9814E00D6DB87 /* Info.plist */,
-				DD245F8029F9814D00D6DB87 /* _023_StateRestoringPractice.xcdatamodeld */,
 			);
 			path = 2023.StateRestoringPractice;
 			sourceTree = "<group>";
@@ -168,15 +134,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD245F8229F9814D00D6DB87 /* _023_StateRestoringPractice.xcdatamodeld in Sources */,
-				AD4A949629FA479E00E6BE27 /* Product.swift in Sources */,
-				DD245F7C29F9814D00D6DB87 /* ViewController.swift in Sources */,
-				AD4A945729FA2D8800E6BE27 /* UIView+.swift in Sources */,
 				DD245F7829F9814D00D6DB87 /* AppDelegate.swift in Sources */,
+				DD2510CE29FF88E1009BA409 /* MainTabsController.swift in Sources */,
 				DD245F7A29F9814D00D6DB87 /* SceneDelegate.swift in Sources */,
-				DD245F8F29F9895300D6DB87 /* SceneDelegate+StateRestoration.swift in Sources */,
-				AD4A945429FA2CFC00E6BE27 /* UIColor+.swift in Sources */,
-				AD4A949829FA484000E6BE27 /* DataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,19 +346,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		DD245F8029F9814D00D6DB87 /* _023_StateRestoringPractice.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				DD245F8129F9814D00D6DB87 /* _023_StateRestoringPractice.xcdatamodel */,
-			);
-			currentVersion = DD245F8129F9814D00D6DB87 /* _023_StateRestoringPractice.xcdatamodel */;
-			path = _023_StateRestoringPractice.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = DD245F6C29F9814D00D6DB87 /* Project object */;
 }

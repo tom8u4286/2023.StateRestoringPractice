@@ -10,90 +10,40 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    
+    // 主要頁面
+    var main: MainTabsController!
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
-            
-        let window = UIWindow(windowScene: windowScene)
         
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
+        main = MainTabsController()
+        window?.rootViewController = main
+        window?.makeKeyAndVisible()
         
-//        print(session.stateRestorationActivity)
+        /// 上一次關閉App時所保存的userActivity，可以在本次開啟App時，從session.stateRestorationActivity取得。
+        ///
+        /// -Authors: Tomtom Chu
+        /// -Date: 2023.5.1
+        guard let userActivity = connectionOptions.userActivities.first ?? session.stateRestorationActivity else { return }
         
-//        guard let userActivity = connectionOptions.userActivities.first ?? session.stateRestorationActivity else { return }
-        
-        print("SceneDelegate: connectionOptions.userActivities.first: \(connectionOptions.userActivities.first)")
-        print("SceneDelegate: scene.session.stateRestorationActivity: \(scene.session.stateRestorationActivity)")
-        
-        
-        if let userActivity = connectionOptions.userActivities.first ?? scene.session.stateRestorationActivity {
-                // Restore the user interface from the state restoration activity.
-//            setupScene(with userActivity: userActivity)
-            
-            print("SceneDelegate：userActivity有值！")
+        /// 確認這個被讀取出來的userActivity，是不是符合我們AppBundle所設定的UserActivity Type。
+        /// 如果是，我們就將他Assign給當前Scene的userActivity。
+        /// scene.userActivity將在下一次App關閉時被保存。
+        ///
+        /// -Authors: Tomtom Chu
+        /// -Date: 2023.5.1
+        if configure(window: window, with: userActivity) {
+            // Remember this activity for later when this app quits or suspends.
+            scene.userActivity = userActivity
+        } else {
+            Swift.debugPrint("Failed to restore scene from \(userActivity)")
         }
         
-        window.rootViewController = ViewController() // Where ViewController() is the initial View Controller
-        window.makeKeyAndVisible()
-        self.window = window
-        
-//        if configure(window: window, session: session, with: userActivity) {
-//            print("🍎 SceneDelegate: configure()")
-//            // Remember this activity for later when this app quits or suspends.
-//            scene.userActivity = userActivity
-//
-//            /** Set the title for this scene to allow the system to differentiate multiple scenes for the user.
-//                If set to nil or an empty string, the system doesn't display a title.
-//            */
-//            scene.title = userActivity.title
-//
-//            // Mark this scene's session with this userActivity product identifier so you can update the UI later.
-//            if let sessionProduct = SceneDelegate.product(for: userActivity) {
-//                /// userInfo是一個以Key-Value的儲存資料的變數。
-//                ///
-//                /// NSUserActivity與UISceneSession都有userInfo，可以儲存資訊。
-//                /// 在SceneDelegate+StateRestoration.swift檔案中，有宣告幾種key值。SceneDelegate.productIdentifierKey是其中一種。
-//                ///
-//                /// -Authors: Tomtom Chu
-//                /// -Date: 2023.4.25
-////                session.userInfo = [SceneDelegate.productIdentifierKey: sessionProduct.identifier]
-//            }
-//        } else {
-//            Swift.debugPrint("Failed to restore scene from \(userActivity)")
-//        }
-        
-        
     }
-    
-    func configure(window: UIWindow?, session: UISceneSession, with activity: NSUserActivity) -> Bool {
-        var succeeded = false
-        
-        if activity.activityType == SceneDelegate.MainSceneActivityType() {
-            
-            let presentView = ViewController()
-            
-            if let userInfo = activity.userInfo {
-                
-                if let navigationController = window?.rootViewController as? UINavigationController {
-                    // 進入presentView
-                    navigationController.pushViewController(presentView, animated: false)
-                }
-                
-                
-                succeeded = true
-                
-            }
-            
-        }
-        
-        return succeeded
-    }
-    
-    
-    
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
@@ -103,24 +53,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        if let userActivity = window?.windowScene?.userActivity {
-            userActivity.becomeCurrent()
-        }
+        // Called when the scene has moved from an inactive state to an active state.
+        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
     }
 
-    
     func sceneWillResignActive(_ scene: UIScene) {
-        // Save any pending changes to the product list.
-//        DataModelManager.sharedInstance.saveDataModel()
-        
-        print("🇰🇵 SceneDelegate: sceneWillResignActive()")
-        
-        if let userActivity = window?.windowScene?.userActivity {
-            userActivity.resignCurrent()
-            
-            scene.userActivity = userActivity
-        }
-        
+        // Called when the scene will move from an active state to an inactive state.
+        // This may occur due to temporary interruptions (ex. an incoming phone call).
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
@@ -134,48 +73,64 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
 
         // Save changes in the application's managed object context when the application transitions to the background.
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
     
+    // MARK: - 狀態保存相關 State Restoration
     
-    // MARK: - Handoff support
+    /// 由於userInfo是以Key-Value的方式除存資料，
+    /// 這參考Apple官方範例，設計一個Key (.selectedTabKey) 來儲存被點選到的分頁(Tab)。
+    /// 在官方範例中，還設計了其他的Key來儲存不同資料。
+    ///
+    /// -Authors: Tomtom Chu
+    /// -Date: 2023.5.1
+    static let selectedTabKey = "selectedTab"
     
-    func scene(_ scene: UIScene, willContinueUserActivityWithType userActivityType: String) {
-        //..
-    }
-
-    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-        
-        print("🇹🇷 SceneDelegate: continue")
-        
-        guard userActivity.activityType == SceneDelegate.MainSceneActivityType() else { return }
- 
-//        if let rootViewController = window?.rootViewController as? UINavigationController {
-//            // Update the detail view controller.
-//            if let detailParentViewController = rootViewController.topViewController as? DetailParentViewController {
-//                detailParentViewController.product = SceneDelegate.product(for: userActivity)
-//            }
-//        }
-    }
-
-    func scene(_ scene: UIScene, didFailToContinueUserActivityWithType userActivityType: String, error: Error) {
-        
-        print("🇯🇵 SceneDelegate: didFailToContinueUserActivityWithType")
-        
-        let alert = UIAlertController(title: NSLocalizedString("UnableToContinueTitle", comment: ""),
-                                      message: error.localizedDescription,
-                                      preferredStyle: .alert)
-        let okAction = UIAlertAction(title: NSLocalizedString("OKTitle", comment: ""), style: .default) { (action) in
-            alert.dismiss(animated: true, completion: nil)
-        }
-        alert.addAction(okAction)
-        window?.rootViewController?.present(alert, animated: true, completion: nil)
-    }
-
+    /// ⭐️ 重要：
+    /// 實作這個function，在App關閉時，告訴系統要被儲存的userActivity。
+    /// 下次App開啟App時，willConnectTo的session.stateRestorationActivity將會取得這個userActivity。
+    ///
+    /// -Authors: Tomtom Chu
+    /// -Date: 2023.5.1
     func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
-        print("🇮🇸 SceneDelegate: stateRestorationActivity() userActivity:\(scene.userActivity)")
         return scene.userActivity
     }
+    
+    /// 從App Bundle(Info.plist)中讀取Activity Type。
+    /// 在Scene-Based(UserActivity-based)的狀態保存設計中，必須要在plist中設定Activity type。
+    /// 可參考：https://developer.apple.com/documentation/foundation/nsuseractivity
+    ///
+    /// -Authors: Tomtom Chu
+    /// -Date: 2023.5.1
+    static let MainSceneActivityType = { () -> String in
+        let activityTypes = Bundle.main.infoDictionary?["NSUserActivityTypes"] as? [String]
+        return activityTypes![0]
+    }
+    
+    /// 這個function確認App開啟後，被讀取出來的userActivity是否符合App Bundle(Info.plist)中設定的UserActivity Type，
+    /// 若符合，則將這個userActivity的內容取出來使用。
+    ///
+    /// -Authors: Tomtom Chu
+    /// -Date: 2023.5.1
+    func configure(window: UIWindow?, with activity: NSUserActivity) -> Bool {
+        var succeeded = false
+        
+        if activity.activityType == SceneDelegate.MainSceneActivityType() {
+            // 開始從UserActivity中的userInfo取出資料：上次離開時的Tab頁面。
+            if let userInfo = activity.userInfo {
+                // 從userActivity中的userInfo取得上次停留的Tab
+                if let selectedTab = userInfo[SceneDelegate.selectedTabKey] as? Int {
+                    main.restoredSelectedTab = selectedTab
+                }
+                succeeded = true
+            }
+        } else {
+            // The incoming userActivity is not recognizable here.
+        }
+        
+        return succeeded
+    }
+
 
 }
+
 
